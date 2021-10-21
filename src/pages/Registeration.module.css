@@ -1,0 +1,8 @@
+.registerButtons {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  width: 240px;
+}
