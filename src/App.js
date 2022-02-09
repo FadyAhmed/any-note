@@ -6,9 +6,22 @@ import Layout from "./components/Layout";
 import Create from "./pages/Create";
 import Notes from "./pages/Notes";
 import Registeration from "./pages/Registeration";
+import { IntlProvider } from "react-intl";
+import text from "./text";
+import rtlPlugin from "stylis-plugin-rtl";
+import { prefixer } from "stylis";
+import createCache from "@emotion/cache";
+import { CacheProvider } from "@emotion/react";
 
 function App() {
   const isDark = useSelector((state) => state.dark.isDark);
+  const language = useSelector((state) => state.language.language);
+  const textContainer = useSelector((state) => state.language.textContainer);
+
+  const cacheRtl = createCache({
+    key: "muirtl",
+    stylisPlugins: [prefixer, rtlPlugin],
+  });
 
   const theme = createMuiTheme({
     palette: isDark
@@ -17,7 +30,6 @@ function App() {
           primary: {
             main: "#787a78",
           },
-
           secondary: { main: "#f44336" },
           appBar: "#393b39",
           activeTile: "#373837",
@@ -33,7 +45,7 @@ function App() {
           activeTile: "#f4f4f4",
           avatarIconHover: "#dbdbdb",
         },
-
+    direction: `${language == "ar" ? "rtl" : "ltr"}`,
     typography: {
       fontFamily: "Quicksand",
       fontWeightLight: 400,
@@ -44,25 +56,30 @@ function App() {
   });
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-
-      <Router>
-        <Layout>
-          <Switch>
-            <Route exact path="/">
-              <Notes />
-            </Route>
-            <Route path="/create">
-              <Create />
-            </Route>
-          </Switch>
-        </Layout>
-        <Route path="/register">
-          <Registeration />
-        </Route>
-      </Router>
-    </ThemeProvider>
+    <IntlProvider locale={language} messages={text[language]}>
+      <CacheProvider value={cacheRtl}>
+        <ThemeProvider theme={theme}>
+          <div dir={language == "ar" ? "rtl" : "ltr"}>
+            <CssBaseline />
+            <Router>
+              <Layout>
+                <Switch>
+                  <Route exact path="/">
+                    <Notes />
+                  </Route>
+                  <Route exact path="/create">
+                    <Create />
+                  </Route>
+                </Switch>
+              </Layout>
+              <Route path="/register">
+                <Registeration />
+              </Route>
+            </Router>
+          </div>
+        </ThemeProvider>{" "}
+      </CacheProvider>
+    </IntlProvider>
   );
 }
 
