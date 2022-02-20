@@ -10,17 +10,7 @@ import { Provider } from "react-redux";
 import App from "./App";
 import "./index.css";
 import store from "./store/index";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCYMIX1EAIJeXlivFE9jr57qHrzf34LfPg",
-  authDomain: "reactcoursetest-b6d20.firebaseapp.com",
-  databaseURL: "https://reactcoursetest-b6d20-default-rtdb.firebaseio.com",
-  projectId: "reactcoursetest-b6d20",
-  storageBucket: "reactcoursetest-b6d20.appspot.com",
-  messagingSenderId: "862786532651",
-  appId: "1:862786532651:web:c35c8e017c79a15a90816e",
-  measurementId: "G-TGH2SDHKTG",
-};
+import firebaseConfig from "./firebase_config.json";
 
 const app = firebase.initializeApp(firebaseConfig);
 
