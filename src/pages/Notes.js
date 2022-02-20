@@ -33,8 +33,6 @@ export default function Notes() {
           fetchedNote.id = note;
           dummyNotes.push(fetchedNote);
         }
-        console.log(dummyNotes);
-
         setNotes(dummyNotes);
       })
       .catch((e) => {

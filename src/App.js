@@ -17,6 +17,7 @@ function App() {
   const isDark = useSelector((state) => state.dark.isDark);
   const language = useSelector((state) => state.language.language);
   const textContainer = useSelector((state) => state.language.textContainer);
+  
 
   const cacheRtl = createCache({
     key: "muirtl",

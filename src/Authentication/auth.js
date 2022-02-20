@@ -44,7 +44,6 @@ export const logout = () => {
     .then(() => {})
     .catch((err) => {
       console.log(err);
-
       error = err;
     });
 

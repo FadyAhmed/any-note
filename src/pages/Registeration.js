@@ -42,6 +42,8 @@ const Registeration = ({ handleClose, open }) => {
   const signInHandler = async (provider) => {
     const { user, error } = await signIn(provider);
     setSigningError(error);
+    
+    console.log(user);
 
     if (!error) {
       handleClose();
@@ -95,7 +97,7 @@ const Registeration = ({ handleClose, open }) => {
             {!isLoggedIn && (
               <List>
                 <ListItem>
-                <FontAwesomeIcon icon={['fab', 'apple']} />
+                  <FontAwesomeIcon icon={["fab", "apple"]} />
 
                   <FacebookLoginButton
                     variant="contained"

@@ -33,7 +33,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
       position: "absolute",
       width: "100%",
       height: "100%",
-      left: 0,
+      right: 0,
       top: 0,
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center",
@@ -53,12 +53,10 @@ export default function CustomizedSwitches({ label, action }) {
   const isDark = useSelector((state) => state.dark.isDark);
 
   return (
-    <div onClick={action}>
-      <FormControlLabel
-        label={label}
-        control={<MaterialUISwitch checked={!isDark} sx={{ m: 1 }} />}
-        style={{ cursor: "default" }}
-      />
-    </div>
+    <FormControlLabel
+      onClick={action}
+      label={label}
+      control={<MaterialUISwitch checked={!isDark} dir='ltr'/>}
+    />
   );
 }

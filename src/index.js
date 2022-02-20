@@ -25,7 +25,7 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig);
 
 const auth = getAuth();
-setPersistence(auth, browserLocalPersistence).then(() => {});
+setPersistence(auth, browserLocalPersistence).then((user) => {});
 
 ReactDOM.render(
   <Provider store={store}>

@@ -1,35 +1,27 @@
 import {
   AppBar,
-  Avatar,
-  Backdrop,
-  Drawer,
+  Avatar, Drawer,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
-  makeStyles,
-  Modal,
-  Toolbar,
-  Typography,
-  Box,
-  Fade,
+  makeStyles, Toolbar,
+  Typography
 } from "@material-ui/core";
-import { purple, yellow } from "@material-ui/core/colors";
+import { yellow } from "@material-ui/core/colors";
 import {
   AddCircleOutlineOutlined,
   Person,
-  SubjectOutlined,
-  WbSunny,
+  SubjectOutlined
 } from "@material-ui/icons";
-import { format } from "date-fns";
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { FormattedDate } from "react-intl";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import Registeration from "../pages/Registeration";
 import { darkModeActions } from "../store/dark-slice";
-import CustomizedSwitches from "./Switch";
 import { languageActions } from "../store/language-slice";
-import { FormattedDate } from "react-intl";
+import CustomizedSwitches from "./Switch";
 
 const drawerWidth = 240;
 
@@ -98,6 +90,7 @@ const Layout = (props) => {
       path: "/create",
     },
   ];
+
   const dispatch = useDispatch();
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -169,20 +162,16 @@ const Layout = (props) => {
               <ListItemText
                 primary={link.title}
                 style={{
-                  display: 'flex'
+                  display: "flex",
                 }}
               />
             </ListItem>
           ))}
           <ListItem>
-            <ListItemIcon>
-              <CustomizedSwitches
-                label={
-                  isDark ? textContainer.lightMode : textContainer.darkMode
-                }
-                action={() => dispatch(darkModeActions.switch())}
-              />
-            </ListItemIcon>
+            <CustomizedSwitches
+              label={isDark ? textContainer.lightMode : textContainer.darkMode}
+              action={() => dispatch(darkModeActions.switch())}
+            />
           </ListItem>
           <ListItem
             button
