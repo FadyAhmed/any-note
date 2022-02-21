@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import text from "../text";
 
 const initialLanguageState = {
-  language: "en",
-  textContainer: text.en,
+  language: localStorage.getItem("language"),
+  textContainer: localStorage.getItem("language") === "en" ? text.en : text.ar,
 };
 
 const languageSlice = createSlice({
@@ -13,6 +13,7 @@ const languageSlice = createSlice({
     switchLanguage(state, actions) {
       state.language = actions.payload.language;
       state.textContainer = text[`${state.language}`];
+      localStorage.setItem("language", state.language);
     },
   },
 });

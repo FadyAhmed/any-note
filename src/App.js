@@ -12,12 +12,12 @@ import rtlPlugin from "stylis-plugin-rtl";
 import { prefixer } from "stylis";
 import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
+import RTL from "./components/RTL";
 
 function App() {
   const isDark = useSelector((state) => state.dark.isDark);
   const language = useSelector((state) => state.language.language);
   const textContainer = useSelector((state) => state.language.textContainer);
-  
 
   const cacheRtl = createCache({
     key: "muirtl",
@@ -62,23 +62,25 @@ function App() {
         <ThemeProvider theme={theme}>
           <div dir={language == "ar" ? "rtl" : "ltr"}>
             <CssBaseline />
-            <Router>
-              <Layout>
-                <Switch>
-                  <Route exact path="/">
-                    <Notes />
-                  </Route>
-                  <Route exact path="/create">
-                    <Create />
-                  </Route>
-                </Switch>
-              </Layout>
-              <Route path="/register">
-                <Registeration />
-              </Route>
-            </Router>
+            <RTL>
+              <Router>
+                <Layout>
+                  <Switch>
+                    <Route exact path="/">
+                      <Notes />
+                    </Route>
+                    <Route exact path="/create">
+                      <Create />
+                    </Route>
+                  </Switch>
+                </Layout>
+                <Route path="/register">
+                  <Registeration />
+                </Route>
+              </Router>
+            </RTL>
           </div>
-        </ThemeProvider>{" "}
+        </ThemeProvider>
       </CacheProvider>
     </IntlProvider>
   );

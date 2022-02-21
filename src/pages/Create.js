@@ -87,20 +87,20 @@ export default function Create() {
       </Typography>
 
       <form noValidate autoComplete="on" onSubmit={handleSubmit}>
-          <TextField
-            className={classes.field}
-            onChange={(e) => {
-              setTitle(e.target.value);
-              setTitleError(false);
-            }}
-            label={textContainer.noteTitle}
-            variant="outlined"
-            color="primary"
-            fullWidth
-            required
-            helperText={titleError ? "Empty" : ""}
-            error={titleError}
-          />
+        <TextField
+          className={classes.field}
+          onChange={(e) => {
+            setTitle(e.target.value);
+            setTitleError(false);
+          }}
+          label={textContainer.noteTitle}
+          variant="outlined"
+          color="primary"
+          fullWidth
+          required
+          helperText={titleError ? "Empty" : ""}
+          error={titleError}
+        />
         <TextField
           className={classes.field}
           onChange={(e) => {
@@ -120,7 +120,7 @@ export default function Create() {
           error={detailsError}
           InputLabelProps={{}}
         />
-        <FormControl className={classes.field}>
+        {/* <FormControl className={classes.field}>
           <FormLabel> {textContainer.noteCategory}</FormLabel>
           <RadioGroup
             value={category}
@@ -147,7 +147,7 @@ export default function Create() {
               label={textContainer.categories[4]}
             />
           </RadioGroup>
-        </FormControl>
+        </FormControl> */}
 
         {isLoading ? (
           <Box sx={{ display: "flex" }}>

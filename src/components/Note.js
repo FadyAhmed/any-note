@@ -8,6 +8,18 @@ import { DeleteOutlined } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
+  cardHeader: {
+    "& .MuiCardHeader-avatar": {
+      marginLeft: ({ language }) => {
+        if (language === "en") return 0;
+        else return 16;
+      },
+      marginRight: ({ language }) => {
+        if (language === "ar") return 0;
+        else return 16;
+      },
+    },
+  },
   note: {
     // border: ({ note }) => {
     //   if (note.category == "work") {
@@ -26,9 +38,9 @@ const useStyles = makeStyles({
 });
 
 const Note = ({ note, deleteNote }) => {
-  const classes = useStyles({ note: note });
   const language = useSelector((state) => state.language.language);
   const textContainer = useSelector((state) => state.language.textContainer);
+  const classes = useStyles({ note: note, language: language });
 
   const deleteNoteHandler = (id) => {
     deleteNote(id);
@@ -37,6 +49,7 @@ const Note = ({ note, deleteNote }) => {
   return (
     <Card elevation={1} className={classes.note}>
       <CardHeader
+        className={classes.cardHeader}
         avatar={
           <Avatar className={classes.avatar}>
             {textContainer.categories[note.category].charAt(0).toUpperCase()}

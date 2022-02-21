@@ -1,19 +1,22 @@
 import {
   AppBar,
-  Avatar, Drawer,
+  Avatar,
+  Drawer,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
-  makeStyles, Toolbar,
-  Typography
+  makeStyles,
+  Toolbar,
+  Typography,
 } from "@material-ui/core";
 import { yellow } from "@material-ui/core/colors";
 import {
   AddCircleOutlineOutlined,
   Person,
-  SubjectOutlined
+  SubjectOutlined,
 } from "@material-ui/icons";
+import { getAuth } from "firebase/auth";
 import { useState } from "react";
 import { FormattedDate } from "react-intl";
 import { useDispatch, useSelector } from "react-redux";
@@ -170,7 +173,9 @@ const Layout = (props) => {
           <ListItem>
             <CustomizedSwitches
               label={isDark ? textContainer.lightMode : textContainer.darkMode}
-              action={() => dispatch(darkModeActions.switch())}
+              action={() => {
+                dispatch(darkModeActions.switch());
+              }}
             />
           </ListItem>
           <ListItem
@@ -181,7 +186,7 @@ const Layout = (props) => {
               else dispatch(languageActions.switchLanguage({ language: "ar" }));
             }}
           >
-            {language == "ar" ? "En" : "ع"}
+            {language == "ar" ? "English" : "عربي"}
           </ListItem>
         </List>
       </Drawer>

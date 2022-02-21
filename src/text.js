@@ -11,7 +11,7 @@ const text = {
     details: "Details",
     noteTitle: "Note Title",
     noteCategory: "Note Category",
-    siteName: "Ninja Notes",
+    siteName: "Any Notes",
     myNotes: "My Notes",
     addNote: "Add Note",
     lightMode: "Light Mode",
@@ -30,13 +30,12 @@ const text = {
     details: "تفاصيل",
     noteCategory: "نوع الملاحظة",
     noteTitle: "عنوان الملاحظة",
-    siteName: "ملاحظات النينجا",
+    siteName: "اي ملاحظة",
     myNotes: "ملاحظاتي",
     addNote: "انشاء ملاحظة",
     lightMode: "الوضع النهاري",
     darkMode: "الوضع اليلي",
     noNotesYet: "لم يتم اضافة اي ملاحظات",
-
   },
 };
 
