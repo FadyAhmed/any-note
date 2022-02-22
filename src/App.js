@@ -1,7 +1,7 @@
 import { createMuiTheme, CssBaseline, ThemeProvider } from "@material-ui/core";
 import { purple, red } from "@material-ui/core/colors";
 import { useSelector } from "react-redux";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Layout from "./components/Layout";
 import Create from "./pages/Create";
 import Notes from "./pages/Notes";
@@ -13,6 +13,7 @@ import { prefixer } from "stylis";
 import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
 import RTL from "./components/RTL";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   const isDark = useSelector((state) => state.dark.isDark);
@@ -63,7 +64,7 @@ function App() {
           <div dir={language == "ar" ? "rtl" : "ltr"}>
             <CssBaseline />
             <RTL>
-              <Router>
+              <BrowserRouter basename={window.location.pathname || ""}>
                 <Layout>
                   <Switch>
                     <Route exact path="/">
@@ -77,7 +78,7 @@ function App() {
                 <Route path="/register">
                   <Registeration />
                 </Route>
-              </Router>
+              </BrowserRouter>
             </RTL>
           </div>
         </ThemeProvider>
