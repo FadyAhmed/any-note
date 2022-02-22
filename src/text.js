@@ -11,7 +11,7 @@ const text = {
     details: "Details",
     noteTitle: "Note Title",
     noteCategory: "Note Category",
-    siteName: "Any Notes",
+    siteName: "Any Note",
     myNotes: "My Notes",
     addNote: "Add Note",
     lightMode: "Light Mode",
