@@ -64,7 +64,7 @@ function App() {
           <div dir={language == "ar" ? "rtl" : "ltr"}>
             <CssBaseline />
             <RTL>
-              <BrowserRouter basename="/any-note">
+              <BrowserRouter>
                 <Layout>
                   <Switch>
                     <Route exact path="/">
