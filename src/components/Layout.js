@@ -1,7 +1,9 @@
 import {
   AppBar,
   Avatar,
+  Button,
   Drawer,
+  IconButton,
   List,
   ListItem,
   ListItemIcon,
@@ -9,12 +11,14 @@ import {
   makeStyles,
   Toolbar,
   Typography,
+  useMediaQuery,
 } from "@material-ui/core";
 import { yellow } from "@material-ui/core/colors";
 import {
   AddCircleOutlineOutlined,
   Person,
   SubjectOutlined,
+  Menu,
 } from "@material-ui/icons";
 import { getAuth } from "firebase/auth";
 import { useState } from "react";
@@ -40,6 +44,10 @@ const useStyles = makeStyles((theme) => {
     },
     drawer: {
       width: drawerWidth,
+      direction: ({ language }) => {
+        if (language === "ar") return "rtl";
+        else return "ltr;";
+      },
     },
     drawerPaper: {
       width: drawerWidth,
@@ -51,7 +59,6 @@ const useStyles = makeStyles((theme) => {
       padding: theme.spacing(2),
     },
     appBar: {
-      width: `calc(100% - ${drawerWidth}px)`,
       background: theme.palette.appBar,
     },
     toolbar: theme.mixins.toolbar,
@@ -78,6 +85,8 @@ const useStyles = makeStyles((theme) => {
 });
 
 const Layout = (props) => {
+  const mobile = useMediaQuery("(max-width:700px)");
+
   const language = useSelector((state) => state.language.language);
   const textContainer = useSelector((state) => state.language.textContainer);
 
@@ -101,7 +110,7 @@ const Layout = (props) => {
   const name = useSelector((state) => state.auth.name);
   const isDark = useSelector((state) => state.dark.isDark);
 
-  const classes = useStyles();
+  const classes = useStyles({ language });
   const history = useHistory();
   const location = useLocation();
 
@@ -109,14 +118,28 @@ const Layout = (props) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const handleDrawerOpen = () => setDrawerOpen(true);
+  const handleDrawerClose = () => setDrawerOpen(false);
+
   const date = new Date();
+
   return (
     <div className={classes.root}>
       <AppBar
         className={classes.appBar}
-        style={{ left: language == "en" ? drawerWidth : 0 }}
+        style={{
+          left: !mobile ? (language == "en" ? drawerWidth : 0) : 0,
+          width: mobile ? "100%" : `calc(100% - ${drawerWidth}px)`,
+        }}
       >
         <Toolbar>
+          {mobile ? (
+            <IconButton onClick={handleDrawerOpen}>
+              <Menu />
+            </IconButton>
+          ) : null}
           <Typography className={classes.date}>
             <FormattedDate
               value={date}
@@ -141,8 +164,10 @@ const Layout = (props) => {
       </AppBar>
       <Drawer
         className={classes.drawer}
-        variant="permanent"
+        variant={mobile ? "temporary" : "permanent"}
         anchor="left"
+        open={drawerOpen}
+        onClose={handleDrawerClose}
         classes={{ paper: classes.drawerPaper }}
       >
         <Typography variant="h5" className={classes.title}>
@@ -156,6 +181,7 @@ const Layout = (props) => {
               divider
               onClick={() => {
                 history.push(link.path);
+                handleDrawerClose();
               }}
               className={
                 location.pathname == link.path ? classes.activePage : null
