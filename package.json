@@ -2,7 +2,7 @@
   "name": "ninja-notes",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://FadyAhmed.github.io/any-note",
+  "homepage": "https://FadyAhmed.github.io/",
   "dependencies": {
     "@emotion/cache": "^11.7.1",
     "@emotion/react": "^11.7.1",

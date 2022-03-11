@@ -36,6 +36,7 @@ function App() {
           appBar: "#393b39",
           activeTile: "#373837",
           avatarIconHover: "#dee0e0",
+          snackBarColor:"#787a78"
         }
       : {
           type: "light",
@@ -46,6 +47,8 @@ function App() {
           appBar: "#fefefe",
           activeTile: "#f4f4f4",
           avatarIconHover: "#dbdbdb",
+          snackBarColor:"#fefefe"
+
         },
     direction: `${language == "ar" ? "rtl" : "ltr"}`,
     typography: {
@@ -64,7 +67,7 @@ function App() {
           <div dir={language == "ar" ? "rtl" : "ltr"}>
             <CssBaseline />
             <RTL>
-              <BrowserRouter basename="/any-note">
+              <BrowserRouter>
                 <Layout>
                   <Switch>
                     <Route exact path="/">

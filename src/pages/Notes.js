@@ -3,10 +3,25 @@ import Masonry from "react-masonry-css";
 import React, { useEffect, useState } from "react";
 import Note from "../components/Note";
 import { useSelector } from "react-redux";
+import { Snackbar } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
+
+const useStyles = makeStyles((theme) => {
+  return {
+    snackbar: {
+      "& .MuiSnackbarContent-root": {
+        backgroundColor: theme.palette.snackBarColor,
+        color: "#000",
+      },
+    },
+  };
+});
 
 export default function Notes() {
+  const isDark = useSelector((state) => state.dark.isDark);
   const [notes, setNotes] = useState([]);
   const textContainer = useSelector((state) => state.language.textContainer);
+  const classes = useStyles({ isDark });
 
   const deleteNoteHandler = (id) => {
     fetch(
@@ -60,11 +75,17 @@ export default function Notes() {
             );
           })}
         </Masonry>
+        <Snackbar
+          className={classes.snackbar}
+          open={true}
+          autoHideDuration={600000}
+          message="asd"
+        ></Snackbar>
       </Container>
     );
   } else {
     return (
-      <Container style={{display:'flex', justifyContent: "center" }}>
+      <Container style={{ display: "flex", justifyContent: "center" }}>
         <Typography>{textContainer.noNotesYet}</Typography>
       </Container>
     );
